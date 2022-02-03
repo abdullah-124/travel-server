@@ -6,6 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname + '/public'));
 const port = 4004;
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.llmdc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -55,9 +56,9 @@ async function run() {
     });
     // addd service in order section
     app.post("/order", async (req, res) => {
-      // console.log('hitting order function')
+    //   console.log('hitting order function')
       const order = req.body;
-      // console.log(order)
+    //   console.log(order)
       const result = await ordersCollection.insertOne(order);
       // console.log(result)
       res.send(result);
