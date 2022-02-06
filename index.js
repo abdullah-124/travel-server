@@ -97,6 +97,20 @@ async function run() {
 
       // console.log('hit the put ',id)
     });
+     // review section 
+    app.post('/review', async(req, res)=>{
+      // console.log('hitting the review')
+      const review = req.body;
+      // console.log(review)
+      const result = await reviewsCollection.insertOne(review)
+      res.send(result)
+    })
+    // get review 
+    app.get('/review', async(req, res)=>{
+      const cursor = await reviewsCollection.find({})
+      const result = await cursor.toArray() 
+      res.json(result)
+    })
   } finally {
   }
 }
